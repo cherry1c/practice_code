@@ -3,38 +3,33 @@
  *
  * [5] 最长回文子串
  */
+package main
 
 // @lc code=start
 func longestPalindrome(s string) string {
 	sLen := len(s)
-	if slen == 0 {
+	if sLen == 0 {
 		return s
 	}
 	dp := make([][]bool, sLen)
 	for i := 0; i < sLen; i++ {
 		dp[i] = make([]bool, sLen)
 	}
-	maxLen := 0
-	result := ""
+
+	result := s[0:1]
 
 	for i := 0; i < sLen; i++ {
+		dp[i][i] = true
 		for j := 0; j < i; j++ {
-			if s[j] != s[i] {
-				dp[i][j] = false
-				continue
-			}
-			if (i-j <= 1) || (i > 0 && s[i-1] == s[j+1]) {
+			if s[j] == s[i] && (i-j <= 1 || dp[i-1][j+1]) {
 				dp[i][j] = true
-				if maxLen < i-j {
+				if len(result) < i-j+1 {
 					result = s[j : i+1]
 				}
-				continue
-			} else {
-				dp[i][j] = false
 			}
 		}
 	}
+	return result
 }
 
 // @lc code=end
-

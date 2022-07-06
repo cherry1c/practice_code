@@ -6,6 +6,9 @@
 
 // @lc code=start
 func convert(s string, numRows int) string {
+	if numRows <= 1 {
+		return s
+	}
 	rowsStr := make([][]rune, numRows)
 	direction := 1
 	index := 0

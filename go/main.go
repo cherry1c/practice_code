@@ -8,5 +8,5 @@ func test01() {
 }
 
 func main() {
-	test01()
+	longestPalindrome("cbbd")
 }

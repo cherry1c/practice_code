@@ -14,7 +14,7 @@ func twoSum(nums []int, target int) []int {
 	}
 	for i, val := range nums {
 		_, ok := m[target-val]
-		if ok {
+		if ok && i != m[target-val] {
 			return []int{i, m[target-val]}
 		}
 	}
