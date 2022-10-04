@@ -163,6 +163,25 @@ func TestDelFeedTopicRelation(db *gorm.DB) {
 	fmt.Printf("successful a: %d\n", result.RowsAffected)
 }
 
+func TestCreateTopic(db *gorm.DB) {
+	// addTopic := Topics{
+	// 	TopicId: 27841993459630096,
+	// 	Title:   "0803测试03",
+	// }
+	// result := db.Model(&Topics{}).Create(map[string]interface{}{
+	// 	"topic_id": 27841993459630096,
+	// 	"title":    "0803测试04",
+	// })
+	sql := "insert into topics (topic_id, title, topic_desc, topic_picture, create_time, lock_status, status, mm_status" +
+		", operat_time, employee_id, operator) values (27841993459630096, '0803测试05', '', '', 0, 0, 0, 0, 0, 0, 0);"
+	result := db.Exec(sql)
+	if result.Error != nil {
+		fmt.Printf("failed reason: %s\n", result.Error.Error())
+		return
+	}
+	fmt.Printf("successful a: %d\n", result.RowsAffected)
+}
+
 func main95() {
 	dsn := "root:root@tcp(172.24.31.95:13357)/topic?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{Logger: logger.Default.LogMode(logger.Info)})
@@ -174,5 +193,6 @@ func main95() {
 	// TestBatchModifyTopicPostCount(db)
 	// TestGetFeedTopicRelationByFeedId(db)
 	// TestAddFeedTopicRelation(db)
-	TestDelFeedTopicRelation(db)
+	// TestDelFeedTopicRelation(db)
+	TestCreateTopic(db)
 }
