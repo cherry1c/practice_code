@@ -1,0 +1,22 @@
+{
+  "local_life":{
+    "name":"local-life",
+    "server":{
+      "ip":"0.0.0.0",
+      "srpc":{
+        "port":8050
+      }
+    },
+    "service":{
+      "handle_timeout":"5s"
+    },
+    "mysql":{
+      "locallife":{
+        "username":"root",
+        "password":"123456",
+        "address":"localhost:3306",
+        "db_name":"local_life"
+      }
+    }
+  }
+}

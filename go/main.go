@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"sync"
@@ -48,9 +49,24 @@ func testAtomic() error {
 	return nil
 }
 
-func main() {
-	if err := testAtomic(); err != nil {
-		fmt.Printf("%v\n", err.Error())
+type Request struct {
+	Scene string
+}
+
+func readJson() {
+	data := `{
+    "scene": "test"
+}
+`
+	r := Request{}
+	if err := json.Unmarshal([]byte(data), &r); err != nil {
+		fmt.Println("unmarshal failed.")
+		return
 	}
+	fmt.Println(r)
+}
+
+func main() {
+	readJson()
 
 }

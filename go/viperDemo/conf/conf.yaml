@@ -1,0 +1,15 @@
+---
+local_life:
+  name: local-life
+  server:
+    ip: 0.0.0.0
+    srpc:
+      port: 8050
+  service:
+    handle_timeout: 5s
+  mysql:
+    locallife:
+      username: root
+      password: root
+      address: local_life:3306
+      db_name: local_life

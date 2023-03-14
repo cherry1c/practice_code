@@ -8,6 +8,10 @@ import (
 var logger *zap.Logger
 
 func main() {
+	test01()
+}
+
+func test01() {
 	InitLogger()
 	defer logger.Sync()
 	simpleHttpGet("www.google.com")
@@ -15,7 +19,8 @@ func main() {
 }
 
 func InitLogger() {
-	logger, _ = zap.NewProduction()
+	logger, _ = zap.NewProduction(zap.AddCallerSkip(2))
+
 }
 
 func simpleHttpGet(url string) {

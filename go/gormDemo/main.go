@@ -1,5 +1,5 @@
 package main
 
 func main() {
-	main95()
+	localhost_()
 }

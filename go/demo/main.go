@@ -78,6 +78,72 @@ func testSlice() {
 	fmt.Println(len(s))
 }
 
+type RType struct {
+}
+
+func (s *RType) registerService(a int, b string) int {
+	fmt.Println(a, b)
+	return a
+}
+
+func registerSrv(typeOf reflect.Type, valueOf reflect.Value, paramList []reflect.Value) {
+	//ret := valueOf.Call(paramList)
+	fmt.Println(valueOf.NumMethod())
+	//m := typeOf.Method(0)
+	// ret := valueOf.Func.Call(paramList)
+	// fmt.Println(ret[0])
+}
+func testRegisterService() {
+	typeOf := reflect.TypeOf(&RType{})
+	valueOf := reflect.ValueOf(&RType{})
+	paramList := []reflect.Value{reflect.ValueOf(10), reflect.ValueOf("hello world")}
+	registerSrv(typeOf, valueOf, paramList)
+}
+
+type Abstract interface {
+	GetName() string
+}
+
+type Instance struct {
+}
+
+func (i *Instance) GetName() string {
+	return "instance"
+}
+
+func test01() {
+	var t Abstract
+	t = &Instance{}
+	t.GetName()
+}
+
+type HelloService struct {
+	Name string
+}
+
+func (h *HelloService) Say() string {
+	return "hello " + h.Name
+}
+
+func (h HelloService) Start() string {
+	return "hello world"
+}
+
+func ServiceClient(name string) *HelloService {
+	return &HelloService{Name: name}
+}
+
+func registerServiceDemo() {
+	var registerFunc = reflect.ValueOf(ServiceClient)
+	var paramList = reflect.ValueOf("gene")
+
+	t := registerFunc.Call([]reflect.Value{paramList})
+	for i := 0; i < t[0].NumMethod(); i++ {
+		v1 := t[0].Method(i).Call([]reflect.Value{})
+		fmt.Println(v1[0].Interface().(string))
+	}
+}
+
 func main() {
-	testSlice()
+	registerServiceDemo()
 }
